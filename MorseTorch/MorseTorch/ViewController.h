@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController <UITextFieldDelegate>
+{
+    NSDictionary *morse;
+    
+    __weak IBOutlet UILabel *displayCodeLabel;
+}
 
 @property (weak, nonatomic) IBOutlet UITextField *textfield;
-
-- (IBAction)translateToMorse:(id)sender;
 
 @end
