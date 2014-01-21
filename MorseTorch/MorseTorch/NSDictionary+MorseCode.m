@@ -54,7 +54,7 @@
         @"9" : @[DASH, DASH, DASH, DASH, DASH, DOT],
         @"0" : @[DASH, DASH, DASH, DASH, DASH],
         
-        @" " : @[DOT, DOT, DOT, DOT, DOT, DOT, DOT] // Space
+        @" " : @[@" "] // Space
         };
     
     return morse;

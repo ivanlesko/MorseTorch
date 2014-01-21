@@ -76,7 +76,26 @@
     }
 }
 
+- (void)flashForMorseArray:(NSArray *)theArray
+{
+    [self.operationQueue addOperationWithBlock:^{
+        for (NSString *letter in theArray) {
+            if ([letter isEqualToString:DOT]) {
+                [self shortFlash];
+            } else if ([letter isEqualToString:DASH]) {
+                [self longFlash];
+            } if ([letter isEqualToString:@" "]) {
+                [self pauseAfterWord];
+            }
+        }
+    }];
+    
+}
+
 @end
+
+
+
 
 
 

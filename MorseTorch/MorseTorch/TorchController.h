@@ -11,7 +11,7 @@
 
 @protocol TorchControllerDelegate <NSObject>
 
-- (NSArray *)morseArrayFromString:(NSString *)theString;
+
 
 @end
 
@@ -29,5 +29,7 @@
 - (void)longFlash;
 - (void)shortFlash;
 - (void)pauseAfterWord;
+
+- (void)flashForMorseArray:(NSArray *)theArray;
 
 @end

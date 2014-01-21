@@ -18,12 +18,10 @@
 
 - (NSArray *)symbolsForString
 {
-    NSString *noSpaceString = [self stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
     NSMutableArray *tempArray = [NSMutableArray array];
-    for (int i = 0; i < noSpaceString.length; i++) {
+    for (int i = 0; i < self.length; i++) {
         
-        [tempArray addObject:[self symbolForLetter:[noSpaceString substringWithRange:NSMakeRange(i, 1)]]];
+        [tempArray addObject:[self symbolForLetter:[self substringWithRange:NSMakeRange(i, 1)]]];
     }
     
     return [NSArray arrayWithArray:tempArray];

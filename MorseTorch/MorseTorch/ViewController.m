@@ -63,7 +63,7 @@
     NSString *character;
     
     if ([textField.text rangeOfCharacterFromSet:[NSCharacterSet illegalCharacterSet]].location != NSNotFound) {
-        NSLog(@"string is illegal");
+        displayCodeLabel.text = @"Invalid character used.  Please use A-Z and 0-9.";
     } else {
         for (int i = 0; i < textField.text.length; i++) {
             character = [textField.text substringWithRange:NSMakeRange(i, 1)];
@@ -73,9 +73,9 @@
     NSString *morseString = [NSString morseStringFromString:textField.text];
     NSArray  *morseArray = [morseString symbolsForString];
     
-    displayCodeLabel.text = morseString;
+    [self.torchController flashForMorseArray:morseArray];
     
-    NSLog(@"%@", morseArray);
+    displayCodeLabel.text = morseString;
     
     return YES;
 }
@@ -89,10 +89,6 @@
 
 #pragma mark - Torch Controller Delegate Methods
 
-- (NSArray *)morseArrayFromString:(NSString *)theString
-{
-    return @[];
-}
 
 @end
 
