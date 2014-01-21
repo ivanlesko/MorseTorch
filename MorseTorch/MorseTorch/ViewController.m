@@ -31,7 +31,8 @@
     
     self.textfield.delegate = self;
     
-    isOn = NO;
+    self.torchController = [TorchController torchController];
+    self.torchController.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,11 +44,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    NSOperationQueue *downloadQueue = [NSOperationQueue new];
-    [downloadQueue addOperationWithBlock:^{
-        // This is running on a background thread.
-    }];
 }
 
 #pragma mark - Textfield Delegate Methods
@@ -75,22 +71,11 @@
     }
     
     NSString *morseString = [NSString morseStringFromString:textField.text];
+    NSArray  *morseArray = [morseString symbolsForString];
+    
     displayCodeLabel.text = morseString;
     
-    NSString *morseCharacter;
-    
-    NSTimeInterval dot = 1;
-    
-    for (int i = 0; i < morseString.length; i++) {
-        morseCharacter = [morseString substringWithRange:NSMakeRange(i, 1)];
-        NSLog(@"%@, %@", morseCharacter, character);
-        if ([morseCharacter isEqualToString:DOT]) {
-            isOn = YES;
-            [self performSelector:@selector(toggleTorch:) withObject:nil afterDelay:dot];
-        } else {
-            isOn = YES;
-        }
-    }
+    NSLog(@"%@", morseArray);
     
     return YES;
 }
@@ -102,18 +87,11 @@
     }
 }
 
-- (void)toggleTorch:(BOOL)onOrOff
-{
-    AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    [captureDevice lockForConfiguration:nil];
-    [captureDevice setTorchMode:onOrOff ? AVCaptureTorchModeOn : AVCaptureTorchModeOff];
-    [captureDevice unlockForConfiguration];
-    
-}
+#pragma mark - Torch Controller Delegate Methods
 
-- (IBAction)toggleLight:(id)sender
+- (NSArray *)morseArrayFromString:(NSString *)theString
 {
-    [self toggleTorch:isOn];
+    return @[];
 }
 
 @end

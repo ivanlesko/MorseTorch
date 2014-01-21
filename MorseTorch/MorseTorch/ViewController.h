@@ -11,13 +11,10 @@
 
 @interface ViewController : UIViewController <UITextFieldDelegate, TorchControllerDelegate>
 {
-    NSDictionary *morse;
     __weak IBOutlet UILabel *displayCodeLabel;
-    BOOL isOn;
 }
 
 @property (weak, nonatomic) IBOutlet UITextField *textfield;
-
-- (IBAction)toggleLight:(id)sender;
+@property (nonatomic) TorchController *torchController;
 
 @end

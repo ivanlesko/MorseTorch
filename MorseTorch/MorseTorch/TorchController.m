@@ -7,7 +7,9 @@
 //
 
 #import "TorchController.h"
-#import <AVFoundation/AVFoundation.h>
+
+#define DOT  @"."
+#define DASH @"-"
 
 @implementation TorchController
 
@@ -15,7 +17,9 @@
 {
     self = [super init];
     if (self) {
-        self.unitDuration = 10000;
+        self.unitDuration = 100000;
+        captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+        self.operationQueue = [NSOperationQueue new];
     }
     
     return self;
@@ -34,34 +38,49 @@
 
 - (void)longFlash
 {
-    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    if ([device hasTorch]) {
-        [device lockForConfiguration:nil];
-        [device setTorchMode:AVCaptureTorchModeOn];
-        usleep(self.unitDuration * 0.5);
-        [device unlockForConfiguration];
-    }
+    [self turnOnFlash];
+    usleep(self.unitDuration * 5);
+    [self turnOffFlash];
+    usleep(self.unitDuration * 2); // One-fifth of a second delay after every long flash.
+    [captureDevice unlockForConfiguration];
+    
 }
 
 - (void)shortFlash
 {
-    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    if ([device hasTorch] && [device hasFlash]) {
-        [device lockForConfiguration:nil];
-        [device setTorchMode:AVCaptureTorchModeOn];
-        usleep(self.unitDuration * 0.1);
-        [device unlockForConfiguration];
+    [self turnOnFlash];
+    usleep(self.unitDuration * 1);
+    [self turnOffFlash];
+    usleep(self.unitDuration * 2); // One-fifth of a second delay after every short flash.
+    [captureDevice unlockForConfiguration];
+}
+
+- (void)pauseAfterWord
+{
+    usleep(self.unitDuration * 10);
+}
+
+- (void)turnOnFlash
+{
+    if ([captureDevice hasTorch] && [captureDevice hasFlash]) {
+        [captureDevice lockForConfiguration:nil];
+        [captureDevice setTorchMode:AVCaptureTorchModeOn];
     }
 }
 
-- (void)turnOnFlash:(AVCaptureDevice *)device
+- (void)turnOffFlash
 {
-    
-}
-
-- (void)turnOffFlash:(AVCaptureDevice *)device
-{
-    
+    if ([captureDevice hasTorch] && [captureDevice hasFlash]) {
+        [captureDevice lockForConfiguration:nil];
+        [captureDevice setTorchMode:AVCaptureTorchModeOff];
+    }
 }
 
 @end
+
+
+
+
+
+
+

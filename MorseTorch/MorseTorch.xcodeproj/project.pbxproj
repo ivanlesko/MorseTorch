@@ -136,16 +136,11 @@
 				4E1F8B64188D9FF100A57EF9 /* Main.storyboard */,
 				4E1F8B67188D9FF100A57EF9 /* ViewController.h */,
 				4E1F8B68188D9FF100A57EF9 /* ViewController.m */,
-				4E1F8B6A188D9FF100A57EF9 /* Images.xcassets */,
-				4E1F8B59188D9FF100A57EF9 /* Supporting Files */,
-				4E1F8BCB188DB0F200A57EF9 /* NSString+MorseCode.h */,
-				4E1F8BCC188DB0F200A57EF9 /* NSString+MorseCode.m */,
-				4E1F8BCE188E264700A57EF9 /* NSCharacterSet+CustomSets.h */,
-				4E1F8BCF188E264700A57EF9 /* NSCharacterSet+CustomSets.m */,
-				4EAC1520188F181B00A70B2C /* NSDictionary+MorseCode.h */,
-				4EAC1521188F181B00A70B2C /* NSDictionary+MorseCode.m */,
 				4EAC1523188F220000A70B2C /* TorchController.h */,
 				4EAC1524188F220000A70B2C /* TorchController.m */,
+				4E1F8B6A188D9FF100A57EF9 /* Images.xcassets */,
+				4EAC1526188F2F3F00A70B2C /* Categories */,
+				4E1F8B59188D9FF100A57EF9 /* Supporting Files */,
 			);
 			path = MorseTorch;
 			sourceTree = "<group>";
@@ -177,6 +172,19 @@
 				4E1F8B7A188D9FF100A57EF9 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4EAC1526188F2F3F00A70B2C /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				4E1F8BCB188DB0F200A57EF9 /* NSString+MorseCode.h */,
+				4E1F8BCC188DB0F200A57EF9 /* NSString+MorseCode.m */,
+				4E1F8BCE188E264700A57EF9 /* NSCharacterSet+CustomSets.h */,
+				4E1F8BCF188E264700A57EF9 /* NSCharacterSet+CustomSets.m */,
+				4EAC1520188F181B00A70B2C /* NSDictionary+MorseCode.h */,
+				4EAC1521188F181B00A70B2C /* NSDictionary+MorseCode.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

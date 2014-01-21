@@ -7,18 +7,27 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 
 @protocol TorchControllerDelegate <NSObject>
 
-// Delegate Methods
+- (NSArray *)morseArrayFromString:(NSString *)theString;
 
 @end
 
 @interface TorchController : NSObject
+{
+    AVCaptureDevice *captureDevice;
+}
 
 @property NSInteger unitDuration;
 @property id delegate;
+@property (nonatomic, strong) NSOperationQueue *operationQueue;
 
 + (TorchController *)torchController;
+
+- (void)longFlash;
+- (void)shortFlash;
+- (void)pauseAfterWord;
 
 @end
