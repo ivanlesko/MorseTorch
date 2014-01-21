@@ -23,6 +23,10 @@
 		4E1F8B7E188D9FF100A57EF9 /* MorseTorchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1F8B7D188D9FF100A57EF9 /* MorseTorchTests.m */; };
 		4E1F8BCD188DB0F200A57EF9 /* NSString+MorseCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1F8BCC188DB0F200A57EF9 /* NSString+MorseCode.m */; };
 		4E1F8BD0188E264700A57EF9 /* NSCharacterSet+CustomSets.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1F8BCF188E264700A57EF9 /* NSCharacterSet+CustomSets.m */; };
+		4E2AA221188EF60D00594B5D /* puppy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4E2AA220188EF60D00594B5D /* puppy.jpg */; };
+		4EAC1522188F181B00A70B2C /* NSDictionary+MorseCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC1521188F181B00A70B2C /* NSDictionary+MorseCode.m */; };
+		4EAC1525188F220000A70B2C /* TorchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC1524188F220000A70B2C /* TorchController.m */; };
+		4EEA5E9C188E37FB0090F410 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EEA5E9B188E37FB0090F410 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +63,12 @@
 		4E1F8BCC188DB0F200A57EF9 /* NSString+MorseCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MorseCode.m"; sourceTree = "<group>"; };
 		4E1F8BCE188E264700A57EF9 /* NSCharacterSet+CustomSets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCharacterSet+CustomSets.h"; sourceTree = "<group>"; };
 		4E1F8BCF188E264700A57EF9 /* NSCharacterSet+CustomSets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCharacterSet+CustomSets.m"; sourceTree = "<group>"; };
+		4E2AA220188EF60D00594B5D /* puppy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = puppy.jpg; sourceTree = "<group>"; };
+		4EAC1520188F181B00A70B2C /* NSDictionary+MorseCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+MorseCode.h"; sourceTree = "<group>"; };
+		4EAC1521188F181B00A70B2C /* NSDictionary+MorseCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+MorseCode.m"; sourceTree = "<group>"; };
+		4EAC1523188F220000A70B2C /* TorchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorchController.h; sourceTree = "<group>"; };
+		4EAC1524188F220000A70B2C /* TorchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TorchController.m; sourceTree = "<group>"; };
+		4EEA5E9B188E37FB0090F410 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EEA5E9C188E37FB0090F410 /* AVFoundation.framework in Frameworks */,
 				4E1F8B55188D9FF100A57EF9 /* CoreGraphics.framework in Frameworks */,
 				4E1F8B57188D9FF100A57EF9 /* UIKit.framework in Frameworks */,
 				4E1F8B53188D9FF100A57EF9 /* Foundation.framework in Frameworks */,
@@ -107,6 +118,7 @@
 		4E1F8B51188D9FF100A57EF9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4EEA5E9B188E37FB0090F410 /* AVFoundation.framework */,
 				4E1F8B52188D9FF100A57EF9 /* Foundation.framework */,
 				4E1F8B54188D9FF100A57EF9 /* CoreGraphics.framework */,
 				4E1F8B56188D9FF100A57EF9 /* UIKit.framework */,
@@ -118,6 +130,7 @@
 		4E1F8B58188D9FF100A57EF9 /* MorseTorch */ = {
 			isa = PBXGroup;
 			children = (
+				4E2AA220188EF60D00594B5D /* puppy.jpg */,
 				4E1F8B61188D9FF100A57EF9 /* AppDelegate.h */,
 				4E1F8B62188D9FF100A57EF9 /* AppDelegate.m */,
 				4E1F8B64188D9FF100A57EF9 /* Main.storyboard */,
@@ -129,6 +142,10 @@
 				4E1F8BCC188DB0F200A57EF9 /* NSString+MorseCode.m */,
 				4E1F8BCE188E264700A57EF9 /* NSCharacterSet+CustomSets.h */,
 				4E1F8BCF188E264700A57EF9 /* NSCharacterSet+CustomSets.m */,
+				4EAC1520188F181B00A70B2C /* NSDictionary+MorseCode.h */,
+				4EAC1521188F181B00A70B2C /* NSDictionary+MorseCode.m */,
+				4EAC1523188F220000A70B2C /* TorchController.h */,
+				4EAC1524188F220000A70B2C /* TorchController.m */,
 			);
 			path = MorseTorch;
 			sourceTree = "<group>";
@@ -240,6 +257,7 @@
 			files = (
 				4E1F8B6B188D9FF100A57EF9 /* Images.xcassets in Resources */,
 				4E1F8B5D188D9FF100A57EF9 /* InfoPlist.strings in Resources */,
+				4E2AA221188EF60D00594B5D /* puppy.jpg in Resources */,
 				4E1F8B66188D9FF100A57EF9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,6 +277,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EAC1525188F220000A70B2C /* TorchController.m in Sources */,
+				4EAC1522188F181B00A70B2C /* NSDictionary+MorseCode.m in Sources */,
 				4E1F8B69188D9FF100A57EF9 /* ViewController.m in Sources */,
 				4E1F8BD0188E264700A57EF9 /* NSCharacterSet+CustomSets.m in Sources */,
 				4E1F8B63188D9FF100A57EF9 /* AppDelegate.m in Sources */,

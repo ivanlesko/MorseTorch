@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TorchController.h"
 
-@interface ViewController : UIViewController <UITextFieldDelegate>
+@interface ViewController : UIViewController <UITextFieldDelegate, TorchControllerDelegate>
 {
     NSDictionary *morse;
-    
     __weak IBOutlet UILabel *displayCodeLabel;
+    BOOL isOn;
 }
 
 @property (weak, nonatomic) IBOutlet UITextField *textfield;
+
+- (IBAction)toggleLight:(id)sender;
 
 @end
