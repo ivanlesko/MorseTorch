@@ -22,6 +22,7 @@
 		4E1F8B7C188D9FF100A57EF9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E1F8B7A188D9FF100A57EF9 /* InfoPlist.strings */; };
 		4E1F8B7E188D9FF100A57EF9 /* MorseTorchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1F8B7D188D9FF100A57EF9 /* MorseTorchTests.m */; };
 		4E1F8BCD188DB0F200A57EF9 /* NSString+MorseCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1F8BCC188DB0F200A57EF9 /* NSString+MorseCode.m */; };
+		4E1F8BD0188E264700A57EF9 /* NSCharacterSet+CustomSets.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1F8BCF188E264700A57EF9 /* NSCharacterSet+CustomSets.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		4E1F8B7D188D9FF100A57EF9 /* MorseTorchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MorseTorchTests.m; sourceTree = "<group>"; };
 		4E1F8BCB188DB0F200A57EF9 /* NSString+MorseCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MorseCode.h"; sourceTree = "<group>"; };
 		4E1F8BCC188DB0F200A57EF9 /* NSString+MorseCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MorseCode.m"; sourceTree = "<group>"; };
+		4E1F8BCE188E264700A57EF9 /* NSCharacterSet+CustomSets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCharacterSet+CustomSets.h"; sourceTree = "<group>"; };
+		4E1F8BCF188E264700A57EF9 /* NSCharacterSet+CustomSets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCharacterSet+CustomSets.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +127,8 @@
 				4E1F8B59188D9FF100A57EF9 /* Supporting Files */,
 				4E1F8BCB188DB0F200A57EF9 /* NSString+MorseCode.h */,
 				4E1F8BCC188DB0F200A57EF9 /* NSString+MorseCode.m */,
+				4E1F8BCE188E264700A57EF9 /* NSCharacterSet+CustomSets.h */,
+				4E1F8BCF188E264700A57EF9 /* NSCharacterSet+CustomSets.m */,
 			);
 			path = MorseTorch;
 			sourceTree = "<group>";
@@ -255,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E1F8B69188D9FF100A57EF9 /* ViewController.m in Sources */,
+				4E1F8BD0188E264700A57EF9 /* NSCharacterSet+CustomSets.m in Sources */,
 				4E1F8B63188D9FF100A57EF9 /* AppDelegate.m in Sources */,
 				4E1F8B5F188D9FF100A57EF9 /* main.m in Sources */,
 				4E1F8BCD188DB0F200A57EF9 /* NSString+MorseCode.m in Sources */,
