@@ -20,6 +20,7 @@
         self.unitDuration = 100000;
         captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
         self.operationQueue = [NSOperationQueue new];
+        self.currentLetter = @"";
     }
     
     return self;
@@ -76,7 +77,7 @@
     }
 }
 
-- (void)flashForMorseArray:(NSArray *)theArray
+- (void)flashForMorseArray:(NSArray *)theArray andString:(NSString *)theString
 {
     [self.operationQueue addOperationWithBlock:^{
         for (NSString *letter in theArray) {
@@ -87,9 +88,10 @@
             } if ([letter isEqualToString:@" "]) {
                 [self pauseAfterWord];
             }
+            
+            self.currentLetter = letter;
         }
     }];
-    
 }
 
 @end

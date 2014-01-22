@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TorchController.h"
 
-@interface ViewController : UIViewController <UITextFieldDelegate, TorchControllerDelegate>
+@interface ViewController : UIViewController <UITextFieldDelegate>
 {
     __weak IBOutlet UILabel *displayCodeLabel;
 }

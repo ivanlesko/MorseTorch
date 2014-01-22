@@ -25,14 +25,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
-    UITapGestureRecognizer *dismissKeyboardTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
-    [self.view addGestureRecognizer:dismissKeyboardTap];
-    
+
     self.textfield.delegate = self;
-    
     self.torchController = [TorchController torchController];
-    self.torchController.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,6 +39,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    UITapGestureRecognizer *dismissKeyboardTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:dismissKeyboardTap];
 }
 
 #pragma mark - Textfield Delegate Methods
@@ -73,9 +71,9 @@
     NSString *morseString = [NSString morseStringFromString:textField.text];
     NSArray  *morseArray = [morseString symbolsForString];
     
-    [self.torchController flashForMorseArray:morseArray];
+    [self.torchController flashForMorseArray:morseArray andString:morseString];
     
-    displayCodeLabel.text = morseString;
+    displayCodeLabel.text = textField.text;
     
     return YES;
 }
@@ -86,9 +84,6 @@
         [aControl endEditing:YES];
     }
 }
-
-#pragma mark - Torch Controller Delegate Methods
-
 
 @end
 

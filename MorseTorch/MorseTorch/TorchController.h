@@ -9,20 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-@protocol TorchControllerDelegate <NSObject>
-
-
-
-@end
-
 @interface TorchController : NSObject
 {
     AVCaptureDevice *captureDevice;
 }
 
-@property NSInteger unitDuration;
-@property id delegate;
+@property unsigned int unitDuration;
 @property (nonatomic, strong) NSOperationQueue *operationQueue;
+@property (nonatomic, strong) NSString *currentLetter;
 
 + (TorchController *)torchController;
 
@@ -30,6 +24,6 @@
 - (void)shortFlash;
 - (void)pauseAfterWord;
 
-- (void)flashForMorseArray:(NSArray *)theArray;
+- (void)flashForMorseArray:(NSArray *)theArray andString:(NSString *)theString;
 
 @end
