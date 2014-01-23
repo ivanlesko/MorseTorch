@@ -13,9 +13,9 @@
 #define DASH @"-"
 
 
-
 @implementation NSString (MorseCode)
 
+// Returns an array for a given string.
 - (NSArray *)symbolsForString
 {
     NSMutableArray *tempArray = [NSMutableArray array];
@@ -26,6 +26,7 @@
     
     return [NSArray arrayWithArray:tempArray];
 }
+
 
 - (NSString *)symbolForLetter:(NSString *)theLetter;
 {
@@ -44,15 +45,17 @@
     NSString *code = @"";
     
     for (int i = 0; i < theString.length; i++) {
-        NSString *letter = [[theString substringWithRange:NSMakeRange(i, 1)] uppercaseString];
+        NSString *letter = [theString substringWithRange:NSMakeRange(i, 1)];
+        letter = [letter uppercaseString];
+        NSLog(@"letter: %@", letter);
         
-        for (NSString *theCode in [NSDictionary morseCode][letter]) {
-            code = [code stringByAppendingString:theCode];
+        for (NSString *symbol in [[NSDictionary morseCode] valueForKey:letter]) {
+            code = [code stringByAppendingString:symbol];
+            NSLog(@"symbol: %@", symbol);
         }
     }
     
     return code;
 }
-
 
 @end

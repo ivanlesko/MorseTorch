@@ -12,8 +12,6 @@
 
 - (NSArray *)symbolsForString;
 
-- (NSString *)symbolForLetter:(NSString *)theLetter;
-
 + (NSString *)morseStringFromString:(NSString *)theString;
 
 @end

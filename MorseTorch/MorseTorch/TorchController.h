@@ -24,6 +24,6 @@
 - (void)shortFlash;
 - (void)pauseAfterWord;
 
-- (void)flashForMorseArray:(NSArray *)theArray andString:(NSString *)theString;
+- (void)flashMorseForString:(NSString *)theString;
 
 @end

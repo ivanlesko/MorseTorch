@@ -58,22 +58,20 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    NSString *character;
+//    if ([textField.text rangeOfCharacterFromSet:[NSCharacterSet illegalCharacterSet]].location != NSNotFound) {
+//        displayCodeLabel.text = @"Invalid character used.  Please use A-Z and 0-9.";
+//    } else {
+//        NSLog(@"%@", [NSString morseStringFromString:textField.text]);
+//    }
     
-    if ([textField.text rangeOfCharacterFromSet:[NSCharacterSet illegalCharacterSet]].location != NSNotFound) {
-        displayCodeLabel.text = @"Invalid character used.  Please use A-Z and 0-9.";
+    if ([self.torchController respondsToSelector:@selector(flashMorseForString:)]) {
+        NSString *textForMorse = textField.text;
+        textForMorse = [textForMorse uppercaseString];
+        [self.torchController flashMorseForString:textForMorse];
     } else {
-        for (int i = 0; i < textField.text.length; i++) {
-            character = [textField.text substringWithRange:NSMakeRange(i, 1)];
-        }
+        NSLog(@"torch controller does not respond to flash Morse");
     }
     
-    NSString *morseString = [NSString morseStringFromString:textField.text];
-    NSArray  *morseArray = [morseString symbolsForString];
-    
-    [self.torchController flashForMorseArray:morseArray andString:morseString];
-    
-    displayCodeLabel.text = textField.text;
     
     return YES;
 }

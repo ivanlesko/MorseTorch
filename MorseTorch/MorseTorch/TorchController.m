@@ -10,6 +10,7 @@
 
 #define DOT  @"."
 #define DASH @"-"
+#define SPACE @" "
 
 @implementation TorchController
 
@@ -77,19 +78,28 @@
     }
 }
 
-- (void)flashForMorseArray:(NSArray *)theArray andString:(NSString *)theString
+- (void)flashMorseForString:(NSString *)theString
 {
     [self.operationQueue addOperationWithBlock:^{
-        for (NSString *letter in theArray) {
-            if ([letter isEqualToString:DOT]) {
-                [self shortFlash];
-            } else if ([letter isEqualToString:DASH]) {
-                [self longFlash];
-            } if ([letter isEqualToString:@" "]) {
-                [self pauseAfterWord];
-            }
+        for (int i = 0; i < theString.length; i++) {
+            NSString *letter = [theString substringWithRange:NSMakeRange(i, 1)];
             
-            self.currentLetter = letter;
+            NSLog(@"letter: %@", letter);
+            
+            NSString *symbolForLetter = [NSDictionary morseCode][letter];
+            for (int j = 0; j < symbolForLetter.length; j++) {
+                NSString *symbol = [symbolForLetter substringWithRange:NSMakeRange(j, 1)];
+                
+                if ([symbol isEqualToString:DOT]) {
+                    [self shortFlash];
+                } else if ([symbol isEqualToString:DASH]) {
+                    [self longFlash];
+                } else if ([symbol isEqualToString:SPACE]) {
+                    [self pauseAfterWord];
+                } else {
+                    NSLog(@"FATAL ERROR: Unrecognized Character sent to Torch Controller.");
+                }
+            }
         }
     }];
 }

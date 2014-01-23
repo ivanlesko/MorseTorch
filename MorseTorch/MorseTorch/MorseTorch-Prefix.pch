@@ -14,3 +14,11 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+
+#import "NSString+MorseCode.h"
+#import "NSCharacterSet+CustomSets.h"
+#import "NSDictionary+MorseCode.h"
+
+#define DOT  @"."
+#define DASH @"-"
+#define SPACE @" "
