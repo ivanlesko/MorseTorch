@@ -11,6 +11,7 @@
 #define DOT  @"."
 #define DASH @"-"
 #define SPACE @" "
+#define UNIT_DURATION 100000
 
 @implementation TorchController
 
@@ -18,7 +19,6 @@
 {
     self = [super init];
     if (self) {
-        self.unitDuration = 100000;
         captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
         self.operationQueue = [NSOperationQueue new];
         self.currentLetter = @"";
@@ -41,9 +41,9 @@
 - (void)longFlash
 {
     [self turnOnFlash];
-    usleep(self.unitDuration * 5);
+    usleep(UNIT_DURATION * 5);
     [self turnOffFlash];
-    usleep(self.unitDuration * 2); // One-fifth of a second delay after every long flash.
+    usleep(UNIT_DURATION * 2); // One-fifth of a second delay after every long flash.
     [captureDevice unlockForConfiguration];
     
 }
@@ -51,15 +51,15 @@
 - (void)shortFlash
 {
     [self turnOnFlash];
-    usleep(self.unitDuration * 1);
+    usleep(UNIT_DURATION * 1);
     [self turnOffFlash];
-    usleep(self.unitDuration * 2); // One-fifth of a second delay after every short flash.
+    usleep(UNIT_DURATION * 2); // One-fifth of a second delay after every short flash.
     [captureDevice unlockForConfiguration];
 }
 
 - (void)pauseAfterWord
 {
-    usleep(self.unitDuration * 10);
+    usleep(UNIT_DURATION * 10);
 }
 
 - (void)turnOnFlash
@@ -81,12 +81,17 @@
 - (void)flashMorseForString:(NSString *)theString
 {
     [self.operationQueue addOperationWithBlock:^{
+        
+        // The length of the alphanumeric string being sent.
         for (int i = 0; i < theString.length; i++) {
             NSString *letter = [theString substringWithRange:NSMakeRange(i, 1)];
             
-            NSLog(@"letter: %@", letter);
+            // Update the View Controller's label.
+            [self.delegate currentMorseLetter:letter];
             
             NSString *symbolForLetter = [NSDictionary morseCode][letter];
+            
+            // The length of each morse symbol for each letter in theString.
             for (int j = 0; j < symbolForLetter.length; j++) {
                 NSString *symbol = [symbolForLetter substringWithRange:NSMakeRange(j, 1)];
                 

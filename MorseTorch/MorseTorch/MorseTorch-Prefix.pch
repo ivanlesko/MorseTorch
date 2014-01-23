@@ -18,6 +18,7 @@
 #import "NSString+MorseCode.h"
 #import "NSCharacterSet+CustomSets.h"
 #import "NSDictionary+MorseCode.h"
+#import "TorchController.h"
 
 #define DOT  @"."
 #define DASH @"-"

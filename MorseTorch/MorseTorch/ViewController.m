@@ -28,6 +28,7 @@
 
     self.textfield.delegate = self;
     self.torchController = [TorchController torchController];
+    self.torchController.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,20 +59,17 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-//    if ([textField.text rangeOfCharacterFromSet:[NSCharacterSet illegalCharacterSet]].location != NSNotFound) {
-//        displayCodeLabel.text = @"Invalid character used.  Please use A-Z and 0-9.";
-//    } else {
-//        NSLog(@"%@", [NSString morseStringFromString:textField.text]);
-//    }
+    if ([textField.text rangeOfCharacterFromSet:[NSCharacterSet illegalCharacterSet]].location != NSNotFound) {
+        displayCodeLabel.text = @"Invalid character used.  Please use a-z and 0-9";
+    }
     
     if ([self.torchController respondsToSelector:@selector(flashMorseForString:)]) {
         NSString *textForMorse = textField.text;
         textForMorse = [textForMorse uppercaseString];
         [self.torchController flashMorseForString:textForMorse];
-    } else {
-        NSLog(@"torch controller does not respond to flash Morse");
     }
     
+    displayCodeLabel.text = textField.text;
     
     return YES;
 }
@@ -81,6 +79,14 @@
     for (UIControl *aControl in self.view.subviews) {
         [aControl endEditing:YES];
     }
+}
+
+#pragma mark - Torch Controller Delegate Methods
+
+- (void)currentMorseLetter:(NSString *)theLetter
+{
+    NSLog(@"%@", theLetter);
+    displayCodeLabel.text = theLetter;
 }
 
 @end
