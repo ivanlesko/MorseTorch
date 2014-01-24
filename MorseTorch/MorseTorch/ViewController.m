@@ -29,6 +29,8 @@
     self.textfield.delegate = self;
     self.torchController = [TorchController torchController];
     self.torchController.delegate = self;
+    
+    self.stopButton.enabled = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,9 +42,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    UITapGestureRecognizer *dismissKeyboardTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
-    [self.view addGestureRecognizer:dismissKeyboardTap];
 }
 
 #pragma mark - Textfield Delegate Methods
@@ -60,33 +59,55 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if ([textField.text rangeOfCharacterFromSet:[NSCharacterSet illegalCharacterSet]].location != NSNotFound) {
-        displayCodeLabel.text = @"Invalid character used.  Please use a-z and 0-9";
+        self.displayCodeLabel.text = @"Invalid character used.  Please use a-z and 0-9";
     }
     
-    if ([self.torchController respondsToSelector:@selector(flashMorseForString:)]) {
-        NSString *textForMorse = textField.text;
-        textForMorse = [textForMorse uppercaseString];
-        [self.torchController flashMorseForString:textForMorse];
-    }
+    [self flashMorseForString:textField.text];
     
-    displayCodeLabel.text = textField.text;
+    self.displayCodeLabel.text = textField.text;
     
     return YES;
 }
 
-- (void)dismissKeyboard
+- (void)flashMorseForString:(NSString *)theString
+{
+    if ([self.torchController respondsToSelector:@selector(flashMorseForString:)]) {
+        NSString *textForMorse = theString;
+        textForMorse = [textForMorse uppercaseString];
+        [self.torchController flashMorseForString:textForMorse];
+        
+        self.stopButton.enabled = YES;
+    }
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     for (UIControl *aControl in self.view.subviews) {
         [aControl endEditing:YES];
     }
 }
 
+- (IBAction)translate:(id)sender
+{
+    if (self.textfield.text.length) {
+        [self flashMorseForString:self.textfield.text];
+        self.stopButton.enabled = YES;
+    } else {
+        self.displayCodeLabel.text = @"Textfield must contain letters or numbers.";
+    }
+}
+
+- (IBAction)stopTransmission:(id)sender
+{
+    self.stopButton.enabled = NO;
+    [[self.torchController operationQueue] cancelAllOperations];
+}
+
 #pragma mark - Torch Controller Delegate Methods
 
 - (void)currentMorseLetter:(NSString *)theLetter
 {
-    NSLog(@"%@", theLetter);
-    displayCodeLabel.text = theLetter;
+    self.displayCodeLabel.text = theLetter;
 }
 
 @end

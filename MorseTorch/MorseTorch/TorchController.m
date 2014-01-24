@@ -91,20 +91,22 @@
             
             NSString *symbolForLetter = [NSDictionary morseCode][letter];
             
-            // The length of each morse symbol for each letter in theString.
-            for (int j = 0; j < symbolForLetter.length; j++) {
-                NSString *symbol = [symbolForLetter substringWithRange:NSMakeRange(j, 1)];
-                
-                if ([symbol isEqualToString:DOT]) {
-                    [self shortFlash];
-                } else if ([symbol isEqualToString:DASH]) {
-                    [self longFlash];
-                } else if ([symbol isEqualToString:SPACE]) {
-                    [self pauseAfterWord];
-                } else {
-                    NSLog(@"FATAL ERROR: Unrecognized Character sent to Torch Controller.");
+            [self.operationQueue addOperationWithBlock:^{
+                // The length of each morse symbol for each letter in theString.
+                for (int j = 0; j < symbolForLetter.length; j++) {
+                    NSString *symbol = [symbolForLetter substringWithRange:NSMakeRange(j, 1)];
+                    
+                    if ([symbol isEqualToString:DOT]) {
+                        [self shortFlash];
+                    } else if ([symbol isEqualToString:DASH]) {
+                        [self longFlash];
+                    } else if ([symbol isEqualToString:SPACE]) {
+                        [self pauseAfterWord];
+                    } else {
+                        NSLog(@"FATAL ERROR: Unrecognized Character sent to Torch Controller.");
+                    }
                 }
-            }
+            }];
         }
     }];
 }
