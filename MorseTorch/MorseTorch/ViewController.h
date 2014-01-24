@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TorchController.h"
-#import <MBProgressHUD.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @class TorchController;
 
@@ -24,6 +24,8 @@
 @property (nonatomic) TorchController *torchController;
 
 @property (nonatomic, weak) IBOutlet UILabel *displayCodeLabel;
+
+@property (nonatomic, strong) MBProgressHUD *progressHud;
 
 // Torch Controller Delegate Methods
 

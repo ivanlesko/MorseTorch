@@ -99,6 +99,7 @@
 
             NSLog(@"%@", [symbolForLetter substringWithRange:NSMakeRange(j, 1)]);
             
+            // Check what type of symbol is being sent... dot. dash, or space.
             [_operationQueue addOperationWithBlock:^{
                 if ([[symbolForLetter substringWithRange:NSMakeRange(j, 1)] isEqualToString:DOT]) {
                     [self shortFlash];

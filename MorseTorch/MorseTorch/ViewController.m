@@ -64,9 +64,9 @@
     
     [self flashMorseForString:textField.text];
     
-    self.displayCodeLabel.text = textField.text;
+    [self dismissKeyboard];
     
-    return YES;
+    return NO;
 }
 
 - (void)flashMorseForString:(NSString *)theString
@@ -82,16 +82,21 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    for (UIControl *aControl in self.view.subviews) {
-        [aControl endEditing:YES];
-    }
+    [self dismissKeyboard];
 }
 
 - (IBAction)translate:(id)sender
 {
     if (self.textfield.text.length) {
         [self flashMorseForString:self.textfield.text];
+        self.translateButton.enabled = NO;
         self.stopButton.enabled = YES;
+        
+        MBProgressHUD *progressHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        progressHUD.mode = MBProgressHUDModeText;
+        
+        [self dismissKeyboard];
+        
     } else {
         self.displayCodeLabel.text = @"Textfield must contain letters or numbers.";
     }
@@ -106,15 +111,35 @@
 {
     self.stopButton.enabled = NO;
     self.translateButton.enabled = YES;
+    
+    self.textfield.text = @"";
+    self.displayCodeLabel.text = @"";
+    
     [[self.torchController operationQueue] cancelAllOperations];
+    
+    [self dismissKeyboard];
+    
+    MBProgressHUD *progressHUD = [MBProgressHUD HUDForView:self.view];
+    [progressHUD hide:YES];
 }
 
 #pragma mark - Torch Controller Delegate Methods
 
 - (void)currentMorseLetter:(NSString *)theLetter
 {
-    self.translateButton.enabled = NO;
-    self.displayCodeLabel.text = theLetter;
+    self.progressHud.labelText = theLetter;
+    
+    MBProgressHUD *progressHUD = [MBProgressHUD HUDForView:self.view];
+    if (progressHUD) {
+        progressHUD.labelText = theLetter;
+    }
+}
+
+- (void)dismissKeyboard
+{
+    for (UIControl *aControl in self.view.subviews) {
+        [aControl endEditing:YES];
+    }
 }
 
 @end
