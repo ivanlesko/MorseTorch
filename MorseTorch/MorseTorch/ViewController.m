@@ -99,7 +99,13 @@
 
 - (IBAction)stopTransmission:(id)sender
 {
+    [self callStopButton];
+}
+
+- (void)callStopButton
+{
     self.stopButton.enabled = NO;
+    self.translateButton.enabled = YES;
     [[self.torchController operationQueue] cancelAllOperations];
 }
 
@@ -107,6 +113,7 @@
 
 - (void)currentMorseLetter:(NSString *)theLetter
 {
+    self.translateButton.enabled = NO;
     self.displayCodeLabel.text = theLetter;
 }
 

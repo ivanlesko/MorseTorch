@@ -33,4 +33,6 @@
 /** Flashes the torch for a given string of letters and numbers. */
 - (void)flashMorseForString:(NSString *)theString;
 
+- (void)callStopButton;
+
 @end

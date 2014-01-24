@@ -21,6 +21,7 @@
     if (self) {
         captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
         self.operationQueue = [NSOperationQueue new];
+        self.operationQueue.maxConcurrentOperationCount = 1;
         self.currentLetter = @"";
     }
     
@@ -79,35 +80,44 @@
 }
 
 - (void)flashMorseForString:(NSString *)theString
-{
-    [self.operationQueue addOperationWithBlock:^{
+{    
+    // The length of the alphanumeric string being sent.
+    for (int i = 0; i < theString.length; i++) {
+        NSString *letter = [theString substringWithRange:NSMakeRange(i, 1)];
         
-        // The length of the alphanumeric string being sent.
-        for (int i = 0; i < theString.length; i++) {
-            NSString *letter = [theString substringWithRange:NSMakeRange(i, 1)];
+        // Update the View Controller's label.
+        [self.operationQueue addOperationWithBlock:^{
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                [self.delegate currentMorseLetter:letter];
+            }];
+        }];
+        
+        NSString *symbolForLetter = [NSDictionary morseCode][letter];
+        
+        // The length of each morse symbol for each letter in theString.
+        for (int j = 0; j < symbolForLetter.length; j++) {
+
+            NSLog(@"%@", [symbolForLetter substringWithRange:NSMakeRange(j, 1)]);
             
-            // Update the View Controller's label.
-            [self.delegate currentMorseLetter:letter];
-            
-            NSString *symbolForLetter = [NSDictionary morseCode][letter];
-            
-            [self.operationQueue addOperationWithBlock:^{
-                // The length of each morse symbol for each letter in theString.
-                for (int j = 0; j < symbolForLetter.length; j++) {
-                    NSString *symbol = [symbolForLetter substringWithRange:NSMakeRange(j, 1)];
-                    
-                    if ([symbol isEqualToString:DOT]) {
-                        [self shortFlash];
-                    } else if ([symbol isEqualToString:DASH]) {
-                        [self longFlash];
-                    } else if ([symbol isEqualToString:SPACE]) {
-                        [self pauseAfterWord];
-                    } else {
-                        NSLog(@"FATAL ERROR: Unrecognized Character sent to Torch Controller.");
-                    }
+            [_operationQueue addOperationWithBlock:^{
+                if ([[symbolForLetter substringWithRange:NSMakeRange(j, 1)] isEqualToString:DOT]) {
+                    [self shortFlash];
+                } else if ([[symbolForLetter substringWithRange:NSMakeRange(j, 1)] isEqualToString:DASH]) {
+                    [self longFlash];
+                } else if ([[symbolForLetter substringWithRange:NSMakeRange(j, 1)] isEqualToString:SPACE]) {
+                    [self pauseAfterWord];
+                } else {
+                    NSLog(@"FATAL ERROR: Unrecognized Character sent to Torch Controller.");
                 }
             }];
         }
+    }
+    
+    // When the torch finishes flashing, enable the Translate button.
+    [self.operationQueue addOperationWithBlock:^{
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self.delegate callStopButton];
+        }];
     }];
 }
 
