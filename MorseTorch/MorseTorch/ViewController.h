@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TorchController.h"
+#import <MBProgressHUD.h>
 
 @class TorchController;
 
